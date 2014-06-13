@@ -25,10 +25,14 @@
 #include <pcl/console/parse.h>
 #include <pcl/registration/ia_ransac.h>
 #include <pcl/visualization/pcl_visualizer.h>
+#include <pcl/ros/conversions.h>
+#include <pcl/point_types.h>
+
 
  // ROS Related Includes
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include <sensor_msgs/PointCloud2.h>
 
 
 #ifndef CLOUDGRABBER_H_
@@ -41,18 +45,20 @@ class CloudGrabber
 {
 
 private:
-    // Our Cloud Objects that we work with
-    //PointCloud<PointXYZRGBA>::Ptr * cloudptr;     // A cloud that will store color info.
-    //PointCloud<PointXYZ>::Ptr * fallbackCloud;    // A fallback cloud with just depth data.
+    // Our Cloud Object that we work with
+    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloudptr;
 
-    // Our visualizer object, used to visualize the point clouds
-    boost::shared_ptr<visualization::CloudViewer> viewer;                 
-    Grabber* openniGrabber; 
+
+    boost::shared_ptr<visualization::CloudViewer> viewer;  // Our visualizer object, used to visualize the point clouds                
+    Grabber* openniGrabber;                                // Our grabber object, grabs video feed from kinect camera and sends it to @function grabberCallback 
+                                                            
                                                   
-    unsigned int filesSaved;                                               // incremented to save different files to disc
-    bool saveCloud, noColor;                                              // Helper variables to denote program states
+    unsigned int filesSaved;                       // incremented to save different files to disc
+    bool visualize, saveCloud, noColor;            // Helper variables to denote program states
 
     // ROS realted stuff
+    ros::Publisher publisher;                      // our PointCloud publisher object
+    std::string PUB_NAME;                    // the broadcasting name of our publisher for ROS subscribers to find
 	
 	
 public:
@@ -76,7 +82,11 @@ public:
     void grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud);
 
     // GET & SET Functions
-    boost::shared_ptr<visualization::CloudViewer> getViewer();
+    boost::shared_ptr<visualization::CloudViewer> getViewer(); // get the viewer object
+
+    std::string getPublisherName(); // get the name of the publisher
+
+    ros::Publisher getPublisher(); // get the ROS publisher object
 	
 };
 

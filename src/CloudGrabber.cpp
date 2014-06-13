@@ -10,13 +10,8 @@
 #include "CloudGrabber.h"
 
 
-// PCL Includes 
-
-// ROS Includes
-
-// STD C++ Icnludes
-
 CloudGrabber::CloudGrabber()
+: cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>)
 {
     //this->cloudptr = new pcl::PointCloud<pcl::PointXYZRGBA>::Ptr (new pcl::PointCloud<pcl::PointXYZRGBA>);
     //this->fallbackCloud = new pcl::PointCloud<pcl::PointXYZ>::Ptr (new pcl::PointCloud<pcl::PointXYZ>);
@@ -24,6 +19,8 @@ CloudGrabber::CloudGrabber()
     this->filesSaved = 0;
     this->saveCloud = false;
     this->noColor = false;
+    this->visualize = true; // make it so we visualize the incoming data by default
+    this->PUB_NAME = "chatter";
 
     openniGrabber = new OpenNIGrabber();
     if (!openniGrabber)
@@ -47,7 +44,7 @@ void CloudGrabber::startFeed()
 // this functionn is called to set up a ROS publisher and publish important PCL data coming from the openniGrabber
 void CloudGrabber::startPublishing(ros::NodeHandle n)
 {
-    ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+    this->publisher = n.advertise<std_msgs::String>(this->PUB_NAME, 1000);
 
     ros::Rate loop_rate(100);
 
@@ -58,7 +55,7 @@ void CloudGrabber::startPublishing(ros::NodeHandle n)
         ss << "hello world ";
         msg.data = ss.str();
         //ROS_INFO("%s", msg.data.c_str());
-        chatter_pub.publish(msg);
+        publisher.publish(msg);
         ros::spinOnce();
         loop_rate.sleep();
     }
@@ -76,22 +73,33 @@ boost::shared_ptr<visualization::CloudViewer> CloudGrabber::createViewer()
     // For detecting when SPACE is pressed.
 void CloudGrabber::keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing)
 {
-    if (event.getKeySym() == "space" && event.keyDown())
+    // if the user wants to save the current point cloud, set the save flag
+    if (event.getKeySym() == "s" && event.keyDown())
         saveCloud = true;
+
+    // if the user presses v, we toggle the visualize flag. 
+    // flag == true means we show the incoming point clouds, flag == flase means we don't update the visualizer (sames memory and processor clocks)
+    if(event.getKeySym() == "v" && event.keyDown())
+        visualize =! visualize;
+
+
 }
 
 
 void CloudGrabber::grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud)
 {
-    if (!this->viewer->wasStopped())
-        this->viewer->showCloud(cloud);
+    if (!this->viewer->wasStopped() && visualize == true)
+    {
+        *cloudptr = *cloud;
+        this->viewer->showCloud(cloudptr);
+    }
 
     if (saveCloud)
     {
         stringstream stream;
         stream << "inputCloud" << filesSaved << ".pcd";
         string filename = stream.str();
-        if (io::savePCDFile(filename, *cloud, true) == 0)
+        if (io::savePCDFile(filename, *cloudptr, true) == 0)
         {
             filesSaved++;
             cout << "Saved " << filename << "." << endl;
@@ -107,4 +115,16 @@ boost::shared_ptr<visualization::CloudViewer> CloudGrabber::getViewer()
 {
 
     return this->viewer;
+}
+
+// get the name of the publisher
+std::string CloudGrabber::getPublisherName()
+{
+    return this->PUB_NAME;
+}
+
+// get the ROS publisher object
+ros::Publisher CloudGrabber::getPublisher()
+{
+    return this->publisher;
 }
