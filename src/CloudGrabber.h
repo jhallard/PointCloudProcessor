@@ -27,6 +27,8 @@
 #include <pcl/visualization/pcl_visualizer.h>
 
  // ROS Related Includes
+#include "ros/ros.h"
+#include "std_msgs/String.h"
 
 
 #ifndef CLOUDGRABBER_H_
@@ -63,6 +65,9 @@ public:
 
     // start the data feed and visualization from the camera source
     void startFeed();
+
+    // called to start publishing data from the kinect
+    void startPublishing(ros::NodeHandle);
 
     // For detecting when SPACE is pressed.
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
