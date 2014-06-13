@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.cpp
+CloudGrabber.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.h
+
 /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.h
 iostream
 -

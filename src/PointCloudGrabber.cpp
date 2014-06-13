@@ -29,21 +29,31 @@ using namespace pcl;
 
 int main(int argc, char** argv)
 {
+	// intiate a ROS node for our program
 	ros::init(argc, argv, "PointCloudProcessor");
 
+	// start the ROS process
 	ros::start();
 
+	// Initiate the homemade CloudGrabber class to grab a data stream from the connect
+	// convert the data to a point cloud, a display the point clouds as a video stream 
+	// in a viewer object
     CloudGrabber * grabber = new CloudGrabber();
+
   	// Broadcast a simple log message
-  	ROS_INFO_STREAM("Hello, world!");
+  	ROS_INFO_STREAM("Starting Kinect Point Cloud Feed");
+
+  	// start data feed and visualization
+  	grabber->startFeed();
+
   	// Process ROS callbacks until receiving a SIGINT (ctrl-c)
+  	// this keeps the PCL/kinect data stream running
   	ros::spin();
 
-	// Main loop.
-	//while (!grabber->getViewer()->wasStopped())
-	//	boost::this_thread::sleep(boost::posix_time::seconds(1));
-
 	// Stop the node's resources
-  ros::shutdown();
+  	ros::shutdown();
+
+  	// clean up dynamic memory
+  	delete grabber;
 
 }

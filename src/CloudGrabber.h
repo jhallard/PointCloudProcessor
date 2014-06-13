@@ -61,6 +61,8 @@ public:
     // Creates, initializes and returns a new viewer.
     boost::shared_ptr<visualization::CloudViewer> createViewer();
 
+    // start the data feed and visualization from the camera source
+    void startFeed();
 
     // For detecting when SPACE is pressed.
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);

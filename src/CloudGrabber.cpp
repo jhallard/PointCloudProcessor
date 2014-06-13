@@ -32,9 +32,19 @@ CloudGrabber::CloudGrabber()
     boost::function<void (const PointCloud<PointXYZRGBA>::ConstPtr&)> f2( boost::bind( &CloudGrabber::grabberCallback, this, _1 ) );
     openniGrabber->registerCallback(f2);
 
-    viewer = createViewer();
+}
 
+
+// start the grabbing of data from the camera source and visualization of the point clouds
+void CloudGrabber::startFeed()
+{
+    // create the viewing window for the incoming point cloud data
+    viewer = createViewer();
+    // start grabbing the point cloud data through OpenNI
     openniGrabber->start();
+
+        while (!getViewer()->wasStopped())
+            boost::this_thread::sleep(boost::posix_time::seconds(1));
 }
 
 // Creates, initializes and returns a new viewer, which is a window that will display the incoming PC data
