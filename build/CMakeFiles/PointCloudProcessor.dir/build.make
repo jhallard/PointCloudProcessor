@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor
+CMAKE_SOURCE_DIR = /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build
+CMAKE_BINARY_DIR = /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/PointCloudProcessor.dir/depend.make
@@ -48,17 +48,17 @@ include CMakeFiles/PointCloudProcessor.dir/flags.make
 
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: CMakeFiles/PointCloudProcessor.dir/flags.make
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: ../src/CloudGrabber.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o -c /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/CloudGrabber.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o -c /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.cpp
 
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/CloudGrabber.cpp > CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.cpp > CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.i
 
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/CloudGrabber.cpp -o CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.cpp -o CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.s
 
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o.requires:
 .PHONY : CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o.requires
@@ -71,17 +71,17 @@ CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o.provides.build: CMakeF
 
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: CMakeFiles/PointCloudProcessor.dir/flags.make
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: ../src/PointCloudGrabber.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o -c /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/PointCloudGrabber.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o -c /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/PointCloudGrabber.cpp
 
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/PointCloudGrabber.cpp > CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/PointCloudGrabber.cpp > CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.i
 
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/PointCloudGrabber.cpp -o CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/PointCloudGrabber.cpp -o CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.s
 
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o.requires:
 .PHONY : CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o.requires
@@ -146,10 +146,32 @@ PointCloudProcessor: /usr/lib/libvtkCommon.so.5.8.0
 PointCloudProcessor: /usr/lib/libvtkRendering.so.5.8.0
 PointCloudProcessor: /usr/lib/libvtkHybrid.so.5.8.0
 PointCloudProcessor: /usr/lib/libvtkCharts.so.5.8.0
+PointCloudProcessor: /opt/ros/hydro/lib/libroscpp.so
+PointCloudProcessor: /usr/lib/libboost_signals-mt.so
+PointCloudProcessor: /usr/lib/libboost_filesystem-mt.so
+PointCloudProcessor: /opt/ros/hydro/lib/librosconsole.so
+PointCloudProcessor: /opt/ros/hydro/lib/librosconsole_log4cxx.so
+PointCloudProcessor: /opt/ros/hydro/lib/librosconsole_backend_interface.so
+PointCloudProcessor: /usr/lib/liblog4cxx.so
+PointCloudProcessor: /usr/lib/libboost_regex-mt.so
+PointCloudProcessor: /opt/ros/hydro/lib/libroscpp_serialization.so
+PointCloudProcessor: /opt/ros/hydro/lib/librostime.so
+PointCloudProcessor: /usr/lib/libboost_date_time-mt.so
+PointCloudProcessor: /usr/lib/libboost_system-mt.so
+PointCloudProcessor: /usr/lib/libboost_thread-mt.so
+PointCloudProcessor: /usr/lib/x86_64-linux-gnu/libpthread.so
+PointCloudProcessor: /opt/ros/hydro/lib/libxmlrpcpp.so
+PointCloudProcessor: /opt/ros/hydro/lib/libcpp_common.so
+PointCloudProcessor: /opt/ros/hydro/lib/libconsole_bridge.so
+PointCloudProcessor: /usr/lib/libboost_filesystem-mt.so
+PointCloudProcessor: /usr/lib/libboost_iostreams-mt.so
+PointCloudProcessor: /usr/lib/libboost_serialization-mt.so
 PointCloudProcessor: /usr/lib/libpcl_common.so
+PointCloudProcessor: /usr/lib/libflann_cpp_s.a
 PointCloudProcessor: /usr/lib/libpcl_kdtree.so
 PointCloudProcessor: /usr/lib/libpcl_octree.so
 PointCloudProcessor: /usr/lib/libpcl_search.so
+PointCloudProcessor: /usr/lib/libOpenNI.so
 PointCloudProcessor: /usr/lib/libpcl_io.so
 PointCloudProcessor: /usr/lib/libpcl_sample_consensus.so
 PointCloudProcessor: /usr/lib/libpcl_filters.so
@@ -161,9 +183,23 @@ PointCloudProcessor: /usr/lib/libpcl_people.so
 PointCloudProcessor: /usr/lib/libpcl_registration.so
 PointCloudProcessor: /usr/lib/libpcl_recognition.so
 PointCloudProcessor: /usr/lib/libpcl_keypoints.so
+PointCloudProcessor: /usr/lib/libqhull.so
 PointCloudProcessor: /usr/lib/libpcl_surface.so
 PointCloudProcessor: /usr/lib/libpcl_tracking.so
 PointCloudProcessor: /usr/lib/libpcl_apps.so
+PointCloudProcessor: /opt/ros/hydro/lib/libroscpp.so
+PointCloudProcessor: /usr/lib/libboost_signals-mt.so
+PointCloudProcessor: /opt/ros/hydro/lib/librosconsole.so
+PointCloudProcessor: /opt/ros/hydro/lib/librosconsole_log4cxx.so
+PointCloudProcessor: /opt/ros/hydro/lib/librosconsole_backend_interface.so
+PointCloudProcessor: /usr/lib/liblog4cxx.so
+PointCloudProcessor: /usr/lib/libboost_regex-mt.so
+PointCloudProcessor: /opt/ros/hydro/lib/libroscpp_serialization.so
+PointCloudProcessor: /opt/ros/hydro/lib/librostime.so
+PointCloudProcessor: /usr/lib/x86_64-linux-gnu/libpthread.so
+PointCloudProcessor: /opt/ros/hydro/lib/libxmlrpcpp.so
+PointCloudProcessor: /opt/ros/hydro/lib/libcpp_common.so
+PointCloudProcessor: /opt/ros/hydro/lib/libconsole_bridge.so
 PointCloudProcessor: /usr/lib/libvtkViews.so.5.8.0
 PointCloudProcessor: /usr/lib/libvtkInfovis.so.5.8.0
 PointCloudProcessor: /usr/lib/libvtkWidgets.so.5.8.0
@@ -195,6 +231,6 @@ CMakeFiles/PointCloudProcessor.dir/clean:
 .PHONY : CMakeFiles/PointCloudProcessor.dir/clean
 
 CMakeFiles/PointCloudProcessor.dir/depend:
-	cd /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build /home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build/CMakeFiles/PointCloudProcessor.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build/CMakeFiles/PointCloudProcessor.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PointCloudProcessor.dir/depend
 

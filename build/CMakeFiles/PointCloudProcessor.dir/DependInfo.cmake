@@ -4,8 +4,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/CloudGrabber.cpp" "/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build/CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o"
-  "/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/PointCloudGrabber.cpp" "/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/build/CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o"
+  "/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.cpp" "/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build/CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o"
+  "/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/PointCloudGrabber.cpp" "/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/build/CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,6 +15,8 @@ SET(CMAKE_TARGET_DEFINITIONS
   "EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET"
   "FLANN_STATIC"
   "qh_QHpointer"
+  "ROS_PACKAGE_NAME=\"PointCloudProcessing\""
+  "ROSCONSOLE_BACKEND_LOG4CXX"
   )
 
 # Targets to which this target links.

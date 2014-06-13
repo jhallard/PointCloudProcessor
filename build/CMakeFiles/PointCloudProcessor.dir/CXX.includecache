@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/CloudGrabber.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.h
 iostream
 -
 sstream
@@ -36,9 +36,9 @@ pcl/registration/ia_ransac.h
 pcl/visualization/pcl_visualizer.h
 -
 
-/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/PointCloudGrabber.cpp
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/PointCloudGrabber.cpp
 CloudGrabber.h
-/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/CloudGrabber.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/CloudGrabber.h
 iostream
 -
 sstream
@@ -52,9 +52,9 @@ pcl/visualization/cloud_viewer.h
 pcl/console/parse.h
 -
 ros/ros.h
-/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/ros/ros.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/ros/ros.h
 std_msgs/String.h
-/home/robotics/Desktop/PCL_Workspace/PointCloudProcessor/src/std_msgs/String.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/std_msgs/String.h
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

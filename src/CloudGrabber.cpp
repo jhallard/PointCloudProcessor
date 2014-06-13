@@ -29,7 +29,6 @@ CloudGrabber::CloudGrabber()
     if (!openniGrabber)
         PCL_ERROR("Could not grab data from camera");
 
-    //boost::function<void (const PointCloud<PointXYZRGBA>::ConstPtr&)> f = boost::bind(boost::mem_fun_ref(&CloudGrabber::grabberCallback), _1);
     boost::function<void (const PointCloud<PointXYZRGBA>::ConstPtr&)> f2( boost::bind( &CloudGrabber::grabberCallback, this, _1 ) );
     openniGrabber->registerCallback(f2);
 

@@ -19,7 +19,10 @@ file(GLOB CloudGrabber_SRC
     "src/*.h"
     "src/*.cpp"
 )
+find_package( catkin REQUIRED COMPONENTS roscpp )
 
 add_executable(PointCloudProcessor ${PointCloudGrabber.cpp})
  
 target_link_libraries (PointCloudProcessor ${PCL_LIBRARIES})
+
+target_link_libraries (PointCloudProcessor ${catkin_LIBRARIES})

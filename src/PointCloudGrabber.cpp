@@ -29,12 +29,21 @@ using namespace pcl;
 
 int main(int argc, char** argv)
 {
-	//ros::init(argc, argv, "talker");
+	ros::init(argc, argv, "PointCloudProcessor");
 
-	CloudGrabber * grabber = new CloudGrabber();
+	ros::start();
+
+    CloudGrabber * grabber = new CloudGrabber();
+  	// Broadcast a simple log message
+  	ROS_INFO_STREAM("Hello, world!");
+  	// Process ROS callbacks until receiving a SIGINT (ctrl-c)
+  	ros::spin();
 
 	// Main loop.
-	while (!grabber->getViewer()->wasStopped())
-		boost::this_thread::sleep(boost::posix_time::seconds(1));
+	//while (!grabber->getViewer()->wasStopped())
+	//	boost::this_thread::sleep(boost::posix_time::seconds(1));
+
+	// Stop the node's resources
+  ros::shutdown();
 
 }
