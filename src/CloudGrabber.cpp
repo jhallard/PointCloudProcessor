@@ -19,6 +19,7 @@ CloudGrabber::CloudGrabber()
     this->filesSaved = 0;
     this->saveCloud = false;
     this->noColor = false;
+    this->publishCurrent = false;
     this->visualize = true; // make it so we visualize the incoming data by default
     this->PUB_NAME = "chatter";
 
@@ -44,18 +45,20 @@ void CloudGrabber::startFeed()
 // this functionn is called to set up a ROS publisher and publish important PCL data coming from the openniGrabber
 void CloudGrabber::startPublishing(ros::NodeHandle n)
 {
-    this->publisher = n.advertise<std_msgs::String>(this->PUB_NAME, 1000);
+    this->publisher = n.advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
 
     ros::Rate loop_rate(100);
 
     while(ros::ok())
     {
-        std_msgs::String msg;
-        std::stringstream ss;
-        ss << "hello world ";
-        msg.data = ss.str();
-        //ROS_INFO("%s", msg.data.c_str());
-        publisher.publish(msg);
+        if(this->publishCurrent)
+        {
+            pcl::PCLPointCloud2 tempcloud;
+            //Input of the above cloud and the corresponding output of cloud_pcl
+            pcl::toPCLPointCloud2(*cloudptr, tempcloud);
+            publisher.publish(tempcloud);
+            this->publishCurrent = false;
+        }
         ros::spinOnce();
         loop_rate.sleep();
     }
@@ -81,6 +84,11 @@ void CloudGrabber::keyboardEventOccurred(const visualization::KeyboardEvent& eve
     // flag == true means we show the incoming point clouds, flag == flase means we don't update the visualizer (sames memory and processor clocks)
     if(event.getKeySym() == "v" && event.keyDown())
         visualize =! visualize;
+
+    // if the user presses the 'p' key we go ahead and publish the current point cloud stored in cloudptr through our publisher object
+    // for othe programs to pick up and work on
+    if(event.getKeySym() == "p" && event.keyDown())
+        this->publishCurrent = true;
 
 
 }

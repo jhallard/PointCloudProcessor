@@ -27,6 +27,8 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/ros/conversions.h>
 #include <pcl/point_types.h>
+#include <pcl/PCLPointCloud2.h>
+#include <pcl_ros/point_cloud.h>
 
 
  // ROS Related Includes
@@ -53,11 +55,11 @@ private:
     Grabber* openniGrabber;                                // Our grabber object, grabs video feed from kinect camera and sends it to @function grabberCallback 
                                                             
                                                   
-    unsigned int filesSaved;                       // incremented to save different files to disc
-    bool visualize, saveCloud, noColor;            // Helper variables to denote program states
+    unsigned int filesSaved;                            // incremented to save different files to disc
+    bool visualize, saveCloud, noColor, publishCurrent; // Helper variables to denote program states
 
     // ROS realted stuff
-    ros::Publisher publisher;                      // our PointCloud publisher object
+    ros::Publisher publisher;                // our PointCloud publisher object
     std::string PUB_NAME;                    // the broadcasting name of our publisher for ROS subscribers to find
 	
 	
