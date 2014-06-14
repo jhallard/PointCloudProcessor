@@ -4,7 +4,8 @@
 /*
  * GrabberClass.h
  *
- * @Info        - Written and Designed by John H Allard, Summer 2014. Created at Harvey Mudd under Dr. Zachary Dodds for the CS REU 2014 Program
+ * @Author      - Written and Designed by John H Allard, Summer 2014.
+ * @Info        - Created at Harvey Mudd under Dr. Zachary Dodds for the CS REU 2014 Program
  * @License     - No official Open Source License, but feel free to use/change/critique as you wish 
  * @Description - This class serves as a means to simplify and abstract some difficulties involving ROS and the PCL Library away from the user.
  *  Including this class into a project allows the programmer to detect a kinect camera connected via USB, continuously gather data from that kinect camera,
@@ -24,8 +25,8 @@
  *       link_directories(${PCL_LIBRARY_DIRS})
  *       add_definitions(${PCL_DEFINITIONS})
  *       find_package( catkin REQUIRED COMPONENTS roscpp )
- *       target_link_libraries (PointCloudProcessor ${PCL_LIBRARIES})
- *       target_link_libraries (PointCloudProcessor ${catkin_LIBRARIES})
+ *       target_link_libraries (xxExe-File-Herexx ${PCL_LIBRARIES})
+ *       target_link_libraries (xxExe-File-Herexx ${catkin_LIBRARIES})
  *
  * - This class has been designed around the ROS-Hydro Desktop Build, for a step-by-step tutorial on how to set up your computer to be compatible with 
  *    ROS, PCL, and OpenNI, go here https://www.cs.hmc.edu/twiki/bin/view/Robotics/AlexPage
@@ -96,7 +97,7 @@ public:
     void startFeed();
 
     // called to start publishing data from the kinect
-    void startPublishing();
+    void startPublishing(int ms = 100);
 
     // GET & SET Functions
     boost::shared_ptr<visualization::CloudViewer> getViewer(); // get the viewer object

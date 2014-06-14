@@ -43,13 +43,13 @@ void CloudGrabber::startFeed()
 
 // this function is called to set up a ROS publisher and publish important PCL data coming from the openniGrabber\
 // @param n - the ros::NodeHandle object 
-void CloudGrabber::startPublishing()//ros::NodeHandle n)
+void CloudGrabber::startPublishing(int ms)
 {
     // set up our publisher to output PCLPointCloud2 messages under the name @field PUB_NAME
     this->publisher = node->advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
 
     // set to publish 10 times a second, should change this to be a variable submitted by the user
-    ros::Rate loop_rate(100);
+    ros::Rate loop_rate(ms);
 
     while(ros::ok())
     {
