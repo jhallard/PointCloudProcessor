@@ -1,3 +1,6 @@
+#ifndef CLOUDGRABBER_H_
+#define CLOUDGRABBER_H_
+
 /*
  * GrabberClass.h
  *
@@ -36,10 +39,6 @@
 #include "std_msgs/String.h"
 #include <sensor_msgs/PointCloud2.h>
 
-
-#ifndef CLOUDGRABBER_H_
-#define CLOUDGRABBER_H_
-
 using namespace pcl;
 using namespace std;
 
@@ -50,11 +49,9 @@ private:
     // Our Cloud Object that we work with
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloudptr;
 
-
     boost::shared_ptr<visualization::CloudViewer> viewer;  // Our visualizer object, used to visualize the point clouds                
     Grabber* openniGrabber;                                // Our grabber object, grabs video feed from kinect camera and sends it to @function grabberCallback 
-                                                            
-                                                  
+                                                                                                              
     unsigned int filesSaved;                            // incremented to save different files to disc
     bool visualize, saveCloud, noColor, publishCurrent; // Helper variables to denote program states
 
@@ -77,7 +74,7 @@ public:
     // called to start publishing data from the kinect
     void startPublishing(ros::NodeHandle);
 
-    // For detecting when SPACE is pressed.
+    // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
 
     // this function is called everytime there is new data
