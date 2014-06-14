@@ -20,7 +20,7 @@ node(new ros::NodeHandle)
     this->noColor = false;
     this->publishCurrent = false;
     this->visualize = true; // make it so we visualize the incoming data by default
-    this->PUB_NAME = "chatter";
+    this->PUB_NAME = "CloudGrabberPublisher";
 
     openniGrabber = new OpenNIGrabber();
     if (!openniGrabber)

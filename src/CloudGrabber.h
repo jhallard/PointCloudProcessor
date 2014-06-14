@@ -4,7 +4,7 @@
 /*
  * GrabberClass.h
  *
- * @Author      - Written and Designed by John H Allard, Summer 2014.
+ * @Author      - John H Allard, Summer 2014.
  * @Info        - Created at Harvey Mudd under Dr. Zachary Dodds for the CS REU 2014 Program
  * @License     - No official Open Source License, but feel free to use/change/critique as you wish 
  * @Description - This class serves as a means to simplify and abstract some difficulties involving ROS and the PCL Library away from the user.
