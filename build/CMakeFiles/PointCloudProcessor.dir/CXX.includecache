@@ -39,6 +39,20 @@ pcl/registration/ia_ransac.h
 -
 pcl/visualization/pcl_visualizer.h
 -
+pcl/ros/conversions.h
+-
+pcl/point_types.h
+-
+pcl/PCLPointCloud2.h
+-
+pcl_ros/point_cloud.h
+-
+ros/ros.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/ros/ros.h
+std_msgs/String.h
+/home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/std_msgs/String.h
+sensor_msgs/PointCloud2.h
+-
 
 /home/jhallard/HMCREU/PointCloudRelated/PointCloudProcessor/src/PointCloudGrabber.cpp
 CloudGrabber.h
@@ -2380,6 +2394,10 @@ pcl/registration/transformation_estimation.h
 pcl/cloud_iterator.h
 -
 pcl/registration/impl/transformation_estimation_svd.hpp
+-
+
+/usr/include/pcl-1.7/pcl/ros/conversions.h
+pcl/conversions.h
 -
 
 /usr/include/pcl-1.7/pcl/search/impl/search.hpp

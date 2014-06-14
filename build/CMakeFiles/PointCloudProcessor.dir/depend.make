@@ -324,6 +324,7 @@ CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/registration/registration.h
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/registration/transformation_estimation.h
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/registration/transformation_estimation_svd.h
+CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/ros/conversions.h
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/search/impl/search.hpp
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/search/kdtree.h
 CMakeFiles/PointCloudProcessor.dir/src/CloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/search/search.h
@@ -799,6 +800,7 @@ CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/registration/registration.h
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/registration/transformation_estimation.h
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/registration/transformation_estimation_svd.h
+CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/ros/conversions.h
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/search/impl/search.hpp
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/search/kdtree.h
 CMakeFiles/PointCloudProcessor.dir/src/PointCloudGrabber.cpp.o: /usr/include/pcl-1.7/pcl/search/search.h
