@@ -40,11 +40,11 @@ node(new ros::NodeHandle)                         // initialize the program node
 }
 
 // starts the data feed, visualization, and publishing
-void CloudGrabber::start()
+void CloudGrabber::start(double pub_rate)
 {
     this->has_started = true;
     this->startFeed();
-    this->startPublishing();
+    this->startPublishing(pub_rate);
 }
 
 // start the grabbing of data from the camera source and visualization of the point clouds

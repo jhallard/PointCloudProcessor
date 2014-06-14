@@ -98,7 +98,7 @@ private:
     void startFeed();
 
     // called to start publishing data from the kinect
-    void startPublishing(double rate = 20);
+    void startPublishing(double rate);
 
     // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
@@ -114,7 +114,7 @@ public:
 
     CloudGrabber();      // Constructor, takes no arguments and needs to arguments
 
-    void start();        // begin the capturing, displaying, and publishing of the cloud data
+    void start(double pub_rate = 10);    // begin the capturing, displaying, and publishing of the cloud data
 
     boost::shared_ptr<visualization::CloudViewer> createViewer(); // Creates, initializes and returns a new viewer.
 
