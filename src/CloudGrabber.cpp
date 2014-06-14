@@ -20,6 +20,7 @@ node(new ros::NodeHandle)                         // initialize the program node
     // initialize members, see header file for descriptions
     this->filesSaved = 0;
     this->saveCloud  = false;
+    this->has_started = false;
     this->noColor    = false;
     this->publishCurrent = false;                
     this->visualize  = true;                      // make it so we visualize the incoming data by default
@@ -38,6 +39,13 @@ node(new ros::NodeHandle)                         // initialize the program node
 
 }
 
+// starts the data feed, visualization, and publishing
+void CloudGrabber::start()
+{
+    this->has_started = true;
+    this->startFeed();
+    this->startPublishing();
+}
 
 // start the grabbing of data from the camera source and visualization of the point clouds
 void CloudGrabber::startFeed()
@@ -46,33 +54,42 @@ void CloudGrabber::startFeed()
     viewer = createViewer();
     // start grabbing the point cloud data through OpenNI
     openniGrabber->start();
+
 }
 
 // this function is called to set up a ROS publisher and publish important PCL data coming from the openniGrabber
-// data is published ever @param ms in milliseconds
-void CloudGrabber::startPublishing(int ms)
+// data is published @param rate times per second. So if rate = 10 we publish every 100 ms
+void CloudGrabber::startPublishing(double rate)
 {
     // set up our publisher to output PCLPointCloud2 messages under the name @field PUB_NAME
-    this->publisher = node->advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
+    this->publisher = this->node->advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
 
     // set the publishing rate based on the user submitted parameter
-    ros::Rate loop_rate(ms);
+    this->publish_rate = 1000/rate;
 
+    this->publishCurrent = true;
+
+    // set the rate at which we publish data
+    ros::Rate loop_rate(this->publish_rate);
+
+    // publishing loop! call the publishData helper function at a user specified time interval until the user closes ROS
     while(ros::ok())
     {
-        // if the user set the publish flag
-        // TODO - Change it so that we publish the messages even without user input, it shouldn't slow us down too much
-        // but it will simplify future processes
-        if(this->publishCurrent)
-        {
-            pcl::PCLPointCloud2 tempcloud; // a ROS msg that holds a point cloud, will be filled with thec current point cloud frame
+        this->publishData();
+        ros::spinOnce();    // spin once to perform all of the callback functions
+        loop_rate.sleep();
+    }
+}
 
-            pcl::toPCLPointCloud2(*cloudptr, tempcloud); //Input of the above cloud and the corresponding output of cloud_pcl
+void CloudGrabber::publishData()
+{
+    if(this->publishCurrent && ros::ok())
+    {
+        pcl::PCLPointCloud2 tempcloud; // a ROS msg that holds a point cloud, will be filled with thec current point cloud frame
 
-            publisher.publish(tempcloud);  // publish the current frame to whoever wants to listen!
-        }
+        pcl::toPCLPointCloud2(*cloudptr, tempcloud); //Input of the above cloud and the corresponding output of cloud_pcl
 
-        loop_rate.sleep(); // wait the user specified amount of time to publish again
+        this->publisher.publish(tempcloud);  // publish the current frame to whoever wants to listen!
     }
 }
 
@@ -107,15 +124,16 @@ void CloudGrabber::keyboardEventOccurred(const visualization::KeyboardEvent& eve
 
 }
 
-
 void CloudGrabber::grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud)
 {
+    // grab the incoming frame and store it in our current frame ptr
+    *cloudptr = *cloud;
+    
+    // if the user wants the data visualized show the current frame
     if (!this->viewer->wasStopped() && visualize == true)
-    {
-        *cloudptr = *cloud;
         this->viewer->showCloud(cloudptr);
-    }
 
+    // if they set the save-flag by pressing the 's' key
     if (saveCloud)
     {
         stringstream stream;

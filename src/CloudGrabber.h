@@ -85,9 +85,20 @@ private:
     ros::Publisher publisher;                // our PointCloud publisher object
     std::string PUB_NAME;                    // the broadcasting name of our publisher for ROS subscribers to find
     ros::NodeHandle * node;                  // Handle to the Node for our ROS publisher and/or subscription servies
+    double publish_rate;                     // rate at which we publish data (times/second)
+
+    bool has_started;                        // if they have already called start() we will set this to true to prevent them from starting
+                                             // up the functions again.
+
 
 
 //** Private Member Functions **//
+
+    // start the data feed and visualization from the camera source
+    void startFeed();
+
+    // called to start publishing data from the kinect
+    void startPublishing(double rate = 20);
 
     // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
@@ -95,16 +106,17 @@ private:
     // this function is called everytime there is new data
     void grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud);
 
+    // this is called by the grabberCallback function to publish the current '3D frame',the current frame is saved under the cloudptr field
+    void publishData();
+
 	
 public:
 
     CloudGrabber();      // Constructor, takes no arguments and needs to arguments
 
+    void start();        // begin the capturing, displaying, and publishing of the cloud data
+
     boost::shared_ptr<visualization::CloudViewer> createViewer(); // Creates, initializes and returns a new viewer.
-
-    void startFeed();   // start the data feed and visualization from the camera source
-
-    void startPublishing(int ms = 100);  // called to start publishing data from the kinect
 
 //** GET & SET Functions **//
 

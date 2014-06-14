@@ -29,10 +29,8 @@ using namespace pcl;
 
 int main(int argc, char** argv)
 {
-  // intiate a ROS node for our program
   ros::init(argc, argv, "PointCloudProcessor");
 
-  // start the ROS process
   ros::start();
 
   // Broadcast a simple log message
@@ -43,14 +41,7 @@ int main(int argc, char** argv)
   CloudGrabber * grabber = new CloudGrabber();
 
   // start data feed and visualization
-  grabber->startFeed();
-
-  // start publishing PCL data from the kinect
-  grabber->startPublishing();
-
-  // Process ROS callbacks until receiving a SIGINT (ctrl-c)
-  // this keeps the PCL/kinect data stream running
-  ros::spin();
+  grabber->start();
 
   // Stop the node's resources
   ros::shutdown();
