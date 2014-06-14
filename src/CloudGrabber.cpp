@@ -9,24 +9,28 @@
 // User Defined Includes
 #include "CloudGrabber.h"
 
-
-CloudGrabber::CloudGrabber()
-: cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>), // initialize our PointCloud ptr 
-node(new ros::NodeHandle)
+// Constructor, no args needed
+CloudGrabber::CloudGrabber() :
+  cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>), // initialize our PointCloud ptr 
+  node(new ros::NodeHandle)                         // initialize the program node handle
 {
-    // initialize members
+    // initialize members, see header file for descriptions
     this->filesSaved = 0;
-    this->saveCloud = false;
-    this->noColor = false;
-    this->publishCurrent = false;
-    this->visualize = true; // make it so we visualize the incoming data by default
-    this->PUB_NAME = "CloudGrabberPublisher";
+    this->saveCloud  = false;
+    this->noColor    = false;
+    this->publishCurrent = false;                
+    this->visualize  = true;                      // make it so we visualize the incoming data by default
+    this->PUB_NAME   = "CloudGrabberPublisher";   // name of the class publisher
 
-    openniGrabber = new OpenNIGrabber();
+    openniGrabber = new OpenNIGrabber();          // this object takes care of grabbing the data from the kinect camera
+                                                
     if (!openniGrabber)
         PCL_ERROR("Could not grab data from camera");
 
+    // make a pointer to the callback function for the grabber object, this is where the grabber object will send the kinect data
     boost::function<void (const PointCloud<PointXYZRGBA>::ConstPtr&)> grabber_cb( boost::bind( &CloudGrabber::grabberCallback, this, _1 ) );
+
+    // register the callback function
     openniGrabber->registerCallback(grabber_cb);
 
 }
@@ -62,7 +66,7 @@ void CloudGrabber::startPublishing(int ms)
             //Input of the above cloud and the corresponding output of cloud_pcl
             pcl::toPCLPointCloud2(*cloudptr, tempcloud);
             publisher.publish(tempcloud);
-            this->publishCurrent = false;
+            //this->publishCurrent = false;
         }
         ros::spinOnce();
         loop_rate.sleep();
@@ -96,7 +100,7 @@ void CloudGrabber::keyboardEventOccurred(const visualization::KeyboardEvent& eve
     // if the user presses the 'p' key we go ahead and publish the current point cloud stored in cloudptr through our publisher object
     // for othe programs to pick up and work on
     if(event.getKeySym() == "p" && event.keyDown())
-        this->publishCurrent = true;
+        this->publishCurrent =! this->publishCurrent;
 
 
 }

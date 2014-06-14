@@ -83,7 +83,16 @@ private:
     std::string PUB_NAME;                    // the broadcasting name of our publisher for ROS subscribers to find
 
     ros::NodeHandle * node;                       // Handle to the Node for our ROS publisher and/or subscription servies
-	
+
+
+//** private member functions **//
+    
+    // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
+    void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
+
+    // this function is called everytime there is new data
+    void grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud);
+
 	
 public:
 
@@ -107,13 +116,6 @@ public:
     ros::Publisher & getPublisher(); // get the ROS publisher object
 
     ros::NodeHandle * getNodeHandle(); // get our ROS Node Handle
-
-protected:
-    // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
-    void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
-
-    // this function is called everytime there is new data
-    void grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud);
 	
 };
 
