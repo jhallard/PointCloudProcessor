@@ -49,9 +49,12 @@ CloudGrabber::~CloudGrabber()
 // starts the data feed, visualization, and publishing
 void CloudGrabber::start(double pub_rate)
 {
-    this->has_started = true;
-    this->startFeed();
-    this->startPublishing(pub_rate);
+    if(!this->has_started)
+    {
+        this->has_started = true;
+        this->startFeed();
+        this->startPublishing(pub_rate);
+    }
 }
 
 // start the grabbing of data from the camera source and visualization of the point clouds
