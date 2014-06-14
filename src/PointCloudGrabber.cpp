@@ -47,7 +47,7 @@ int main(int argc, char** argv)
   grabber->startFeed();
 
   // start publishing PCL data from the kinect
-  grabber->startPublishing();//n);
+  grabber->startPublishing();
 
   // Process ROS callbacks until receiving a SIGINT (ctrl-c)
   // this keeps the PCL/kinect data stream running

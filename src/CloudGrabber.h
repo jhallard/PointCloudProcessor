@@ -1,18 +1,18 @@
 #ifndef CLOUDGRABBER_H_
 #define CLOUDGRABBER_H_
 
-/*
- * GrabberClass.h
+/**
+ * @File        - GrabberClass.h
  *
  * @Author      - John H Allard, Summer 2014.
  * @Info        - Created at Harvey Mudd under Dr. Zachary Dodds for the CS REU 2014 Program
  * @License     - No official Open Source License, but feel free to use/change/critique as you wish 
  * @Description - This class serves as a means to simplify and abstract some difficulties involving ROS and the PCL Library away from the user.
- *  Including this class into a project allows the programmer to detect a kinect camera connected via USB, continuously gather data from that kinect camera,
- *  converting that data into a Point Cloud object, displaying that data in a continuous '3D' video-feed on the users screen, saving specific '3D-frames' to
- *  file, and publishing the incoming '3D' frame at specific time intervals via the ROS publisher and subscription libraries, all with just an object 
- *  instantiation, a CloudGrabber::start function call to start the data capture and video feed, and a ClodGrabber::startPublisher call to start the publishing of
- *  data for other programs to intercept and do with what they wish.
+ *     Including this class into a project allows the programmer to detect a kinect camera connected via USB, continuously gather data from that kinect camera,
+ *     converting that data into a Point Cloud object, displaying that data in a continuous '3D' video-feed on the users screen, saving specific '3D-frames' to
+ *     file, and publishing the incoming '3D' frame at specific time intervals via the ROS publisher and subscription libraries, all with just an object 
+ *     instantiation, a CloudGrabber::start function call to start the data capture and video feed, and a ClodGrabber::startPublisher call to start the publishing of
+ *     data for other programs to intercept and do with what they wish.
  *
  * Important Notes 
  * - If you wish to use the ROS features with this class you must first make a 'roscore' call inside a terminal. This will start the ROS 
@@ -31,7 +31,7 @@
  * - This class has been designed around the ROS-Hydro Desktop Build, for a step-by-step tutorial on how to set up your computer to be compatible with 
  *    ROS, PCL, and OpenNI, go here https://www.cs.hmc.edu/twiki/bin/view/Robotics/AlexPage
  *
- */
+ **/
 
 
  // Standard C++ Includes
@@ -86,7 +86,7 @@ private:
 
 
 //** private member functions **//
-    
+
     // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
 
