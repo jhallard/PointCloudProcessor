@@ -69,6 +69,9 @@ class CloudGrabber
 {
 
 private:
+
+//** Member Fields **//
+
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloudptr;   // A ptr to our current Point Cloud 'frame' we obtained from the openniGrabber,
                                                         // it is set by intercepting the incoming data in the GrabberCallback function before it is displayed
 
@@ -76,16 +79,15 @@ private:
     Grabber* openniGrabber;                                // Our grabber object, grabs video feed from kinect camera and sends it to @function grabberCallback 
                                                                                                               
     unsigned int filesSaved;                            // incremented to save different files to disc
-    bool visualize, saveCloud, noColor, publishCurrent; // Helper variables to denote program states
+    bool visualize, saveCloud, noColor, publishCurrent; // Helper variables/flags to denote program states
 
     // ROS realted stuff
     ros::Publisher publisher;                // our PointCloud publisher object
     std::string PUB_NAME;                    // the broadcasting name of our publisher for ROS subscribers to find
+    ros::NodeHandle * node;                  // Handle to the Node for our ROS publisher and/or subscription servies
 
-    ros::NodeHandle * node;                       // Handle to the Node for our ROS publisher and/or subscription servies
 
-
-//** private member functions **//
+//** Private Member Functions **//
 
     // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
     void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
@@ -96,19 +98,16 @@ private:
 	
 public:
 
-    // Constructor, takes no arguments and needs to arguments
-    CloudGrabber();
+    CloudGrabber();      // Constructor, takes no arguments and needs to arguments
 
-    // Creates, initializes and returns a new viewer.
-    boost::shared_ptr<visualization::CloudViewer> createViewer();
+    boost::shared_ptr<visualization::CloudViewer> createViewer(); // Creates, initializes and returns a new viewer.
 
-    // start the data feed and visualization from the camera source
-    void startFeed();
+    void startFeed();   // start the data feed and visualization from the camera source
 
-    // called to start publishing data from the kinect
-    void startPublishing(int ms = 100);
+    void startPublishing(int ms = 100);  // called to start publishing data from the kinect
 
-    // GET & SET Functions
+//** GET & SET Functions **//
+
     boost::shared_ptr<visualization::CloudViewer> getViewer(); // get the viewer object
 
     std::string getPublisherName(); // get the name of the publisher

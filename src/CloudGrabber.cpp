@@ -126,7 +126,8 @@ void CloudGrabber::grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& clo
             filesSaved++;
             cout << "Saved " << filename << "." << endl;
         }
-        else PCL_ERROR("Problem saving %s.\n", filename.c_str());
+        else 
+            PCL_ERROR("Problem saving %s.\n", filename.c_str());
 
         saveCloud = false;
     }
