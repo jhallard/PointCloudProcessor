@@ -79,7 +79,7 @@ private:
     Grabber* openniGrabber;                                // Our grabber object, grabs video feed from kinect camera and sends it to @function grabberCallback 
                                                                                                               
     unsigned int filesSaved;                            // incremented to save different files to disc
-    bool visualize, saveCloud, noColor, publishCurrent; // Helper variables/flags to denote program states
+    bool visualize, publishCurrent;                     // Helper variables/flags to denote program states
 
     // ROS realted stuff
     ros::Publisher publisher;                // our PointCloud publisher object
@@ -109,14 +109,20 @@ private:
     // this is called by the grabberCallback function to publish the current '3D frame',the current frame is saved under the cloudptr field
     void publishData();
 
+    // Creates, initializes and returns a new viewer.
+    boost::shared_ptr<visualization::CloudViewer> createViewer();
+
 	
 public:
 
-    CloudGrabber();      // Constructor, takes no arguments and needs to arguments
+    // Constructor, takes no arguments and needs no arguments
+    CloudGrabber(bool);
 
-    void start(double pub_rate = 10);    // begin the capturing, displaying, and publishing of the cloud data
+    // Clean up our dynamic memory
+    ~CloudGrabber();
 
-    boost::shared_ptr<visualization::CloudViewer> createViewer(); // Creates, initializes and returns a new viewer.
+    // begin the capturing, displaying, and publishing of the cloud data
+    void start(double pub_rate = 10); 
 
 //** GET & SET Functions **//
 

@@ -13,17 +13,15 @@
 #include "CloudGrabber.h"
 
 // Constructor, no args needed
-CloudGrabber::CloudGrabber() :
+CloudGrabber::CloudGrabber(bool visualize) :
 cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>), // initialize our PointCloud ptr 
 node(new ros::NodeHandle)                         // initialize the program node handle
 {
     // initialize members, see header file for descriptions
     this->filesSaved = 0;
-    this->saveCloud  = false;
     this->has_started = false;
-    this->noColor    = false;
     this->publishCurrent = false;                
-    this->visualize  = true;                      // make it so we visualize the incoming data by default
+    this->visualize  = visualize;                      // make it so we visualize the incoming data by default
     this->PUB_NAME   = "CloudGrabberPublisher";   // name of the class publisher
 
     openniGrabber = new OpenNIGrabber();          // this object takes care of grabbing the data from the kinect camera
@@ -37,6 +35,12 @@ node(new ros::NodeHandle)                         // initialize the program node
     // register the callback function
     openniGrabber->registerCallback(grabber_cb);
 
+}
+
+CloudGrabber::~CloudGrabber()
+{
+    delete node;
+    delete openniGrabber;
 }
 
 // starts the data feed, visualization, and publishing
@@ -108,9 +112,20 @@ boost::shared_ptr<visualization::CloudViewer> CloudGrabber::createViewer()
 // For detecting when SPACE is pressed.
 void CloudGrabber::keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing)
 {
-    // if the user wants to save the current point cloud, set the save flag
+    // if the user wants to save, save the system to file
     if (event.getKeySym() == "s" && event.keyDown())
-        this->saveCloud = true;
+    {
+        stringstream stream;
+        stream << "inputCloud" << filesSaved << ".pcd";
+        string filename = stream.str();
+        if (io::savePCDFile(filename, *cloudptr, true) == 0)
+        {
+            filesSaved++;
+            cout << "Saved " << filename << "." << endl;
+        }
+        else 
+            PCL_ERROR("Problem saving %s.\n", filename.c_str());
+    }
 
     // if the user presses v, we toggle the visualize flag. 
     // flag == true means we show the incoming point clouds, flag == flase means we don't update the visualizer (sames memory and processor clocks)
@@ -130,25 +145,8 @@ void CloudGrabber::grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& clo
     *cloudptr = *cloud;
     
     // if the user wants the data visualized show the current frame
-    if (!this->viewer->wasStopped() && visualize == true)
+    if (visualize == true && !this->viewer->wasStopped())
         this->viewer->showCloud(cloudptr);
-
-    // if they set the save-flag by pressing the 's' key
-    if (saveCloud)
-    {
-        stringstream stream;
-        stream << "inputCloud" << filesSaved << ".pcd";
-        string filename = stream.str();
-        if (io::savePCDFile(filename, *cloudptr, true) == 0)
-        {
-            filesSaved++;
-            cout << "Saved " << filename << "." << endl;
-        }
-        else 
-            PCL_ERROR("Problem saving %s.\n", filename.c_str());
-
-        saveCloud = false;
-    }
 }
 
 
