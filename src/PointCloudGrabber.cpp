@@ -32,9 +32,6 @@ int main(int argc, char** argv)
   // intiate a ROS node for our program
   ros::init(argc, argv, "PointCloudProcessor");
 
-  // main node handle for our program
-  ros::NodeHandle n;
-
   // start the ROS process
   ros::start();
 
@@ -50,7 +47,7 @@ int main(int argc, char** argv)
   grabber->startFeed();
 
   // start publishing PCL data from the kinect
-  grabber->startPublishing(n);
+  grabber->startPublishing();//n);
 
   // Process ROS callbacks until receiving a SIGINT (ctrl-c)
   // this keeps the PCL/kinect data stream running

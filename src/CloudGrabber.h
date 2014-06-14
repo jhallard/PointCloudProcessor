@@ -4,12 +4,31 @@
 /*
  * GrabberClass.h
  *
- * @ Author - john H Allard, Created at Harvey Mudd under Dr. Zachary Dodds for the CS REU 2014 Program
- * A Description - This class holds together all of the data fields and common functionality needed to obtain data from a kinnect
- * and two send this data over to another program to be processed (filtered, feature recognition, etc).
+ * @ Author - John H Allard, Created at Harvey Mudd under Dr. Zachary Dodds for the CS REU 2014 Program
+ * @Description - This class serves as a means to simplify and abstract some difficulties involving ROS and the PCL Library away from the user.
+ * Including this class into a project allows the programmer to detect a kinect camera connected via USB, continuously gather data from that kinect camera,
+ * converting that data into a Point Cloud object, displaying that data in a continuous '3D' video-feed on the users screen, saving specific '3D-frames' to
+ * file, and publishing the incoming '3D' frame at specific time intervals via the ROS publisher and subscription libraries, all with just an object 
+ * instantiation, a CloudGrabber::start function call to start the data capture and video feed, and a ClodGrabber::startPublisher call to start the publishing of
+ * data for other programs to intercept and do with what they wish.
+ *
+ * Important Notes 
+ * - If you wish to use the ROS features with this class you must first make a 'roscore' call inside a terminal. This will start the ROS 
+ *   drivers and allow our class to publish data.
+ *
+ * - The CmakeFile must include the following lines (or equivilent)
+ *       include_directories(${PCL_INCLUDE_DIRS})
+ *       link_directories(${PCL_LIBRARY_DIRS})
+ *       add_definitions(${PCL_DEFINITIONS})
+ *       find_package( catkin REQUIRED COMPONENTS roscpp )
+ *       target_link_libraries (PointCloudProcessor ${PCL_LIBRARIES})
+ *       target_link_libraries (PointCloudProcessor ${catkin_LIBRARIES})
+ *
+ * - This class has been designed around the ROS-Hydro Desktop Build, for a step-by-step tutorial on how to set up your computer to be compatible with 
+*    ROS, PCL, and OpenNI, go here https://www.cs.hmc.edu/twiki/bin/view/Robotics/AlexPage
+ *
  */
 
- // Project File Includes
 
  // Standard C++ Includes
 #include <iostream>
@@ -46,8 +65,8 @@ class CloudGrabber
 {
 
 private:
-    // Our Cloud Object that we work with
-    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloudptr;
+    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloudptr;   // A ptr to our current Point Cloud 'frame' we obtained from the openniGrabber,
+                                                        // it is set by intercepting the incoming data in the GrabberCallback function before it is displayed
 
     boost::shared_ptr<visualization::CloudViewer> viewer;  // Our visualizer object, used to visualize the point clouds                
     Grabber* openniGrabber;                                // Our grabber object, grabs video feed from kinect camera and sends it to @function grabberCallback 
@@ -58,6 +77,8 @@ private:
     // ROS realted stuff
     ros::Publisher publisher;                // our PointCloud publisher object
     std::string PUB_NAME;                    // the broadcasting name of our publisher for ROS subscribers to find
+
+    ros::NodeHandle * node;                       // Handle to the Node for our ROS publisher and/or subscription servies
 	
 	
 public:
@@ -72,20 +93,23 @@ public:
     void startFeed();
 
     // called to start publishing data from the kinect
-    void startPublishing(ros::NodeHandle);
-
-    // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
-    void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
-
-    // this function is called everytime there is new data
-    void grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud);
+    void startPublishing();
 
     // GET & SET Functions
     boost::shared_ptr<visualization::CloudViewer> getViewer(); // get the viewer object
 
     std::string getPublisherName(); // get the name of the publisher
 
-    ros::Publisher getPublisher(); // get the ROS publisher object
+    ros::Publisher & getPublisher(); // get the ROS publisher object
+
+    ros::NodeHandle * getNodeHandle(); // get our ROS Node Handle
+
+protected:
+    // For detecting when keyboard command are issues, allows the user to save, toggle visualization, and publish current point cloud data
+    void keyboardEventOccurred(const visualization::KeyboardEvent& event, void* nothing);
+
+    // this function is called everytime there is new data
+    void grabberCallback(const PointCloud<PointXYZRGBA>::ConstPtr& cloud);
 	
 };
 

@@ -11,11 +11,10 @@
 
 
 CloudGrabber::CloudGrabber()
-: cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>)
+: cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>), // initialize our PointCloud ptr 
+node(new ros::NodeHandle)
 {
-    //this->cloudptr = new pcl::PointCloud<pcl::PointXYZRGBA>::Ptr (new pcl::PointCloud<pcl::PointXYZRGBA>);
-    //this->fallbackCloud = new pcl::PointCloud<pcl::PointXYZ>::Ptr (new pcl::PointCloud<pcl::PointXYZ>);
-
+    // initialize members
     this->filesSaved = 0;
     this->saveCloud = false;
     this->noColor = false;
@@ -27,8 +26,8 @@ CloudGrabber::CloudGrabber()
     if (!openniGrabber)
         PCL_ERROR("Could not grab data from camera");
 
-    boost::function<void (const PointCloud<PointXYZRGBA>::ConstPtr&)> f2( boost::bind( &CloudGrabber::grabberCallback, this, _1 ) );
-    openniGrabber->registerCallback(f2);
+    boost::function<void (const PointCloud<PointXYZRGBA>::ConstPtr&)> grabber_cb( boost::bind( &CloudGrabber::grabberCallback, this, _1 ) );
+    openniGrabber->registerCallback(grabber_cb);
 
 }
 
@@ -42,15 +41,21 @@ void CloudGrabber::startFeed()
     openniGrabber->start();
 }
 
-// this functionn is called to set up a ROS publisher and publish important PCL data coming from the openniGrabber
-void CloudGrabber::startPublishing(ros::NodeHandle n)
+// this function is called to set up a ROS publisher and publish important PCL data coming from the openniGrabber\
+// @param n - the ros::NodeHandle object 
+void CloudGrabber::startPublishing()//ros::NodeHandle n)
 {
-    this->publisher = n.advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
+    // set up our publisher to output PCLPointCloud2 messages under the name @field PUB_NAME
+    this->publisher = node->advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
 
+    // set to publish 10 times a second, should change this to be a variable submitted by the user
     ros::Rate loop_rate(100);
 
     while(ros::ok())
     {
+        // if the user set the publish flag
+        // TODO - Change it so that we publish the messages even without user input, it shouldn't slow us down too much
+        // but it will simplify future processes
         if(this->publishCurrent)
         {
             pcl::PCLPointCloud2 tempcloud;
@@ -64,10 +69,13 @@ void CloudGrabber::startPublishing(ros::NodeHandle n)
     }
 }
 
-// Creates, initializes and returns a new viewer, which is a window that will display the incoming PC data
+// Creates, initializes and returns a new viewer, which is a window that will display the incoming Point Cloud data
 boost::shared_ptr<visualization::CloudViewer> CloudGrabber::createViewer()
 {
+    // create our viewer object
     boost::shared_ptr<visualization::CloudViewer> v(new visualization::CloudViewer("Kinect Camera Cloud Viewer"));
+
+    // register the keyboard callback
     v->registerKeyboardCallback(&CloudGrabber::keyboardEventOccurred, *this, (void*)& viewer);
 
     return v;
@@ -132,7 +140,12 @@ std::string CloudGrabber::getPublisherName()
 }
 
 // get the ROS publisher object
-ros::Publisher CloudGrabber::getPublisher()
+ros::Publisher & CloudGrabber::getPublisher()
 {
     return this->publisher;
+}
+
+ros::NodeHandle * CloudGrabber::getNodeHandle()
+{
+    return node;
 }
