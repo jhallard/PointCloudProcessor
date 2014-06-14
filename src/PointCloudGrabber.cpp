@@ -33,9 +33,6 @@ int main(int argc, char** argv)
 
   ros::start();
 
-  // Broadcast a simple log message
-  ROS_INFO_STREAM("Starting Kinect Point Cloud Feed");
-
   // Initiate the homemade CloudGrabber class to grab a data stream from the connect convert
   // the data to a point cloud, a display the point clouds as a video stream in a viewer object
   CloudGrabber * grabber = new CloudGrabber(true);

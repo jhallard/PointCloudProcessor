@@ -17,6 +17,9 @@ CloudGrabber::CloudGrabber(bool visualize) :
 cloudptr(new pcl::PointCloud<pcl::PointXYZRGBA>), // initialize our PointCloud ptr 
 node(new ros::NodeHandle)                         // initialize the program node handle
 {
+    if(visualize)
+        ROS_INFO_STREAM("Visualizing Data via CloudViewer");
+
     // initialize members, see header file for descriptions
     this->filesSaved = 0;
     this->has_started = false;
@@ -56,8 +59,13 @@ void CloudGrabber::startFeed()
 {
     // create the viewing window for the incoming point cloud data
     viewer = createViewer();
+
+    ROS_INFO_STREAM("Starting Data Feed from Kinect..");
+
     // start grabbing the point cloud data through OpenNI
     openniGrabber->start();
+
+    ROS_INFO_STREAM("Success : Data Feed Complete");
 
 }
 
@@ -65,6 +73,7 @@ void CloudGrabber::startFeed()
 // data is published @param rate times per second. So if rate = 10 we publish every 100 ms
 void CloudGrabber::startPublishing(double rate)
 {
+     ROS_INFO_STREAM("Setting up Publisher under name : " + this->PUB_NAME);
     // set up our publisher to output PCLPointCloud2 messages under the name @field PUB_NAME
     this->publisher = this->node->advertise<pcl::PCLPointCloud2&>(this->PUB_NAME, 1000);
 
@@ -76,6 +85,7 @@ void CloudGrabber::startPublishing(double rate)
     // set the rate at which we publish data
     ros::Rate loop_rate(this->publish_rate);
 
+    ROS_INFO_STREAM("Publisher : " + this->PUB_NAME + " has begun publishing.");
     // publishing loop! call the publishData helper function at a user specified time interval until the user closes ROS
     while(ros::ok())
     {
